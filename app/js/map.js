@@ -43,7 +43,6 @@ player.prototype.setPlayerPosition = function () {
     if (contact >= 0 && contact < 100 && arr[contact] == null)
       arr[contact] = 'full';
   });
-  return (this.position = cell);
 };
 
 function obstacles(name, image) {
