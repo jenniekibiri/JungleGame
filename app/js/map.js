@@ -83,6 +83,6 @@ obstacle.setObstaclePosition();
 function availableCell() {
   do {
     cell = Math.floor(Math.random() * 100);
-  } while (!arr[cell] == null);
+  } while (cell in arr);
   return cell;
 }
