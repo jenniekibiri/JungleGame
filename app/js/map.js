@@ -38,7 +38,8 @@ player.prototype.setPlayerPosition = function () {
   playerBox.classList.add(this.name);
   //players should not be adjacent
   var contacts = [cell - 1, cell - 10, cell + 1, cell + 10];
-
+  // fill adjacent cells to the player with with values to indicate not empty
+  // This disallows the cells from being occupied by a another player
   contacts.forEach((contact, i) => {
     if (contact >= 0 && contact < 100 && arr[contact] == null)
       arr[contact] = 'full';
