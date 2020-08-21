@@ -1,61 +1,59 @@
 .header {
-    background-image: url("../image/head.jpg");
-    height: 80px;
+  background-image: url('../image/head.jpg');
+  height: 80px;
 }
 
 section #map {
-    background-color: rgb(59, 56, 56);
+  background-color: rgb(59, 56, 56);
 }
 
 #map {
-    margin-top: 25px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 604px;
-    height: 604px;
-    position: relative;
-    border: 2px solid rgb(199, 140, 13);
-    background-image: url("../image/head.jpg");
-    background-size: cover;
-
+  margin-top: 25px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 604px;
+  height: 604px;
+  position: relative;
+  border: 2px solid rgb(199, 140, 13);
+  background-image: url('../image/head.jpg');
+  background-size: cover;
 }
 
 .grid {
-    width: 60px;
-    height: 60px;
-    float: left;
-    border: 1px solid rgb(253, 255, 255);
+  width: 60px;
+  height: 60px;
+  float: left;
+  border: 1px solid rgb(253, 255, 255);
 }
 
 .sword {
-    background-image: url('../image/sword.png');
-    background-repeat: no-repeat;
-   
+  background-image: url('../image/sword.png');
+  background-repeat: no-repeat;
 }
 
 .gun {
-    background-image: url('../image/gun.png');
-    background-repeat: no-repeat;
+  background-image: url('../image/gun.png');
+  background-repeat: no-repeat;
 }
 
 .dagger {
-    background-image: url('../image/dagger.png');
-    background-repeat: no-repeat;
+  background-image: url('../image/dagger.png');
+  background-repeat: no-repeat;
 }
 
 .bow {
-    background-image: url('../image/bow.png');
-    background-repeat: no-repeat;
+  background-image: url('../image/bow.png');
+  background-repeat: no-repeat;
 }
-.player1{
-    background-image: url('../image/player1.png');
-    background-repeat: no-repeat;
+.player1 {
+  background-image: url('../image/player1.png');
+  background-repeat: no-repeat;
 }
-.player2{
-    background-image: url('../image/player2.png');
-    background-repeat: no-repeat;
+.player2 {
+  background-image: url('../image/player2.png');
+  background-repeat: no-repeat;
 }
-.obstacle{
-    background-image: url('../image/obstacle.png');
-    background-repeat: no-repeat;
+.obstacle {
+  background-image: url('../image/obstacle.png');
+  background-repeat: no-repeat;
 }

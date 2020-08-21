@@ -1,5 +1,6 @@
 # JungleGame
-Openclassrooms javascript game 
+
+Openclassrooms javascript game
 Start by randomly generating the game map. Each box can be either:
 
 Empty
