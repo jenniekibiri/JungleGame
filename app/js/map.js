@@ -1,6 +1,7 @@
 //variables
 const map = document.getElementById('map');
 var cell;
+var fight;
 var arr = [];
 
 function createMap(numberCells) {
@@ -37,14 +38,19 @@ player.prototype.setPlayerPosition = function () {
   const playerBox = document.getElementById(cell);
   playerBox.classList.add(this.name);
   //players should not be adjacent
-  var contacts = [cell - 1, cell - 10, cell + 1, cell + 10];
+  var adjacents = [cell - 1, cell - 10, cell + 1, cell + 10];
   // fill adjacent cells to the player with with values to indicate not empty
   // This disallows the cells from being occupied by a another player
-  contacts.forEach((contact, i) => {
-    if (contact >= 0 && contact < 100 && arr[contact] == null)
-      arr[contact] = 'full';
+  adjacents.forEach((adjacent) => {
+    if (adjacent >= 0 && adjacent < 100 && arr[adjacent] == null)
+      arr[adjacent] = 'full';
+ 
   });
+
+  return this.position =cell
 };
+// if the cell is between zero and 1oo -and  the cell is null ....it will make that cell full
+// what makes that cell null?
 
 function obstacles(name, image) {
   this.name = name;
@@ -79,10 +85,120 @@ player1.setPlayerPosition();
 player2.setPlayerPosition();
 obstacle.setObstaclePosition();
 
+
 //findAvailableCell
 function availableCell() {
   do {
     cell = Math.floor(Math.random() * 100);
   } while (cell in arr);
+
   return cell;
 }
+//movements
+player.prototype.setMovementRange = function (playerPosition) {
+  $("section#map > div").removeClass('range');
+  rangeX = [];
+  rangeY = []
+  let width = 10
+  let up = playerPosition - 10
+  let down = playerPosition + 10
+  let right = playerPosition + 1
+  let left = playerPosition - 1
+  let blocked = false
+  let xMin = playerPosition - playerPosition % width;
+  let xMax = xMin + 9
+
+  while (up >= 0 && up >= p -30) {
+    blocked = false;
+    const ranges = document.getElementById(up).attr('class').split(/\s+/)
+    ranges.forEach((rangeItem) => {
+     if (rangeItem === 'block' || rangeItem === 'player1' ||rangeItem=== 'player2') {
+        blocked = true;
+      }
+       })
+
+      if (blocked === true) {
+      break;
+    }
+     else {
+       document.getElementById(up).classList.add('range')
+      rY.push(up);
+    }
+    up = up - 10;   
+  }
+     
+    while (down <=99  && down <= p +30) {
+    blocked = false;
+    const ranges = document.getElementById(down).attr('class').split(/\s+/)
+    ranges.forEach((rangeItem) => {
+     if (rangeItem === 'block' || rangeItem === 'player1' ||rangeItem=== 'player2') {
+        blocked = true;
+      }
+       })
+
+      if (blocked === true) {
+      break;
+    }
+     else {
+       document.getElementById(down).classList.add('range')
+      rY.push(down);
+    }
+    down= down + 10;   
+  }
+    while (left >= xmin && left >= p -3) {
+    blocked = false;
+    const ranges = document.getElementById(left).attr('class').split(/\s+/)
+    ranges.forEach((rangeItem) => {
+     if (rangeItem === 'block' || rangeItem === 'player1' ||rangeItem=== 'player2') {
+        blocked = true;
+      }
+       })
+
+      if (blocked === true) {
+      break;
+    }
+     else {
+       document.getElementById(left).classList.add('range')
+      rY.push(left);
+    }
+    left =left - 1;   
+  } 
+  while (right <= xMax && right <= p+3) {
+    blocked = false;
+    const ranges = document.getElementById(right).attr('class').split(/\s+/)
+    ranges.forEach((rangeItem) => {
+     if (rangeItem === 'block' || rangeItem === 'player1' ||rangeItem=== 'player2') {
+        blocked = true;
+      }
+       })
+
+      if (blocked === true) {
+      break;
+    }
+     else {
+       document.getElementById(up).classList.add('range')
+      rY.push(right);
+    }
+    right = right+1;   
+  }
+}
+
+
+
+
+
+//active player
+player.prototype.activePlayer = function () {
+  if (this.name === 'player1') {
+    activePlayer = player1;
+    passivePlayer = player2;
+  } else {
+    activePlayer = player2;
+    passivePlayer = player1;
+
+  }
+ if (fight === false) {
+    activePlayer.setRange(this.position);
+  }
+}
+
