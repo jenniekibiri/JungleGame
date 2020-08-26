@@ -3,7 +3,7 @@ const map = document.getElementById('map');
 var cell;
 var fight;
 var arr = [];
-
+var box = document.getElementsByClassName('grid')
 function createMap(numberCells) {
   for (i = 0; i < numberCells; i++) {
     gridCells = document.createElement('div');
@@ -47,11 +47,14 @@ player.prototype.setPlayerPosition = function () {
  
   });
 
-  return this.position =cell
+
+
+return this.position =cell
+
 };
+
 // if the cell is between zero and 1oo -and  the cell is null ....it will make that cell full
 // what makes that cell null?
-
 function obstacles(name, image) {
   this.name = name;
   this.image = image;
@@ -97,18 +100,20 @@ function availableCell() {
 //movements
 player.prototype.setMovementRange = function (playerPosition) {
   $("section#map > div").removeClass('range');
-  rangeX = [];
-  rangeY = []
+   rangeX = [];
+   rangeY = []
   let width = 10
   let up = playerPosition - 10
+  console.log(up)
   let down = playerPosition + 10
+  console.log(down)
   let right = playerPosition + 1
   let left = playerPosition - 1
   let blocked = false
   let xMin = playerPosition - playerPosition % width;
   let xMax = xMin + 9
 
-  while (up >= 0 && up >= p -30) {
+  while (up >= 0 && up >= playerPosition -30) {
     blocked = false;
     const ranges = document.getElementById(up).attr('class').split(/\s+/)
     ranges.forEach((rangeItem) => {
@@ -122,12 +127,12 @@ player.prototype.setMovementRange = function (playerPosition) {
     }
      else {
        document.getElementById(up).classList.add('range')
-      rY.push(up);
+      rangeY.push(up);
     }
     up = up - 10;   
   }
      
-    while (down <=99  && down <= p +30) {
+    while (down <=99  && down <= playerPosition +30) {
     blocked = false;
     const ranges = document.getElementById(down).attr('class').split(/\s+/)
     ranges.forEach((rangeItem) => {
@@ -141,11 +146,11 @@ player.prototype.setMovementRange = function (playerPosition) {
     }
      else {
        document.getElementById(down).classList.add('range')
-      rY.push(down);
+      rangeY.push(down);
     }
     down= down + 10;   
   }
-    while (left >= xmin && left >= p -3) {
+    while (left >= xmin && left >= playerPosition -3) {
     blocked = false;
     const ranges = document.getElementById(left).attr('class').split(/\s+/)
     ranges.forEach((rangeItem) => {
@@ -159,11 +164,11 @@ player.prototype.setMovementRange = function (playerPosition) {
     }
      else {
        document.getElementById(left).classList.add('range')
-      rY.push(left);
+      rangeX.push(left);
     }
     left =left - 1;   
   } 
-  while (right <= xMax && right <= p+3) {
+  while (right <= xMax && right <= playerPosition+3) {
     blocked = false;
     const ranges = document.getElementById(right).attr('class').split(/\s+/)
     ranges.forEach((rangeItem) => {
@@ -177,28 +182,75 @@ player.prototype.setMovementRange = function (playerPosition) {
     }
      else {
        document.getElementById(up).classList.add('range')
-      rY.push(right);
+      rangeX.push(right);
     }
     right = right+1;   
   }
+   console.log(rangeX)
 }
 
+// active player
 
+//player movement
+player.prototype.movement=(targetPosition)=>{
+  //get new player position
+  
+  targetPosition = parseInt(targetPosition);
+  //arr change
+  arr.splice(this.position, 1); 
 
-
-
-//active player
-player.prototype.activePlayer = function () {
-  if (this.name === 'player1') {
-    activePlayer = player1;
-    passivePlayer = player2;
-  } else {
-    activePlayer = player2;
-    passivePlayer = player1;
-
+  arr[targetPosition] = this.name;
+  //change player position
+  var oldPosition=document.getElementById(this.position);
+  oldPosition.classList.remove(this.name);
+  var newPosition = document.getElementById(targetPosition)
+  newPosition.classList.add(this.name);
+ this.position = targetPosition;
+  adjacentCells= [targetPosition-1,targetPosition+1,targetPosition-10,targetPosition+10];
+switch(this.name) {
+    case 'player1':
+      newPosition.innerHTML = '<img src="../images/'+this.image+'" height="58"></img>';
+      break;
+    case 'player2':
+      newPosition.innerHTML = '<img src="../images/'+this.image+'" height="58"></img>';
+      break;
   }
- if (fight === false) {
-    activePlayer.setRange(this.position);
+
+  oldPosition.classList.remove(this.name)
+
+  $.each(adjacentCells, function(index, adjacent) {
+    if ($("#"+adjacent).find('img').length) {
+      fight = true;
+    }
+  });
+  if(fight === false ){
+    passivePlayer.activatePlayer(); 
   }
+
+else{
+    //fight  
+    rangeX=[]; rangeY=[];
+    $("div#map > div").removeClass('range');
+   // fightButtonEnabling();
 }
 
+} 
+player1.activePlayer()
+
+
+box.hover(function(){
+    if (jQuery.inArray(parseInt(this.id),rangeX) >= 0 || jQuery.inArray(parseInt(this.id), rangeY) >= 0) { 
+      $(this).addClass(window.activePlayer.name+'Moving') ;
+    } //hover method has two functions mouse leave and mouse enter
+    
+  }, function(){
+    $(this).removeClass(window.activePlayer.name+'Moving');
+});
+
+box.on("click", function() {
+  var targetPosition = parseInt(this.id); 
+  if (jQuery.inArray(targetPosition, rangeX) >= 0 || jQuery.inArray(targetPosition, rangeY) >= 0) { 
+    box.removeClass(window.activePlayer.name+'Moving');
+    activePlayer.move(targetPosition);
+  }
+});

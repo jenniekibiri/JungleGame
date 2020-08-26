@@ -57,3 +57,8 @@ section #map {
   background-image: url('../image/obstacle.png');
   background-repeat: no-repeat;
 }
+.range {
+  border: 2px solid #ffeb00;
+  box-shadow: 0 0 10px #000;
+  cursor: pointer;
+}
