@@ -1,9 +1,10 @@
 //variables
-const map = document.getElementById('map');
+const map = document.getElementById('map')
 var cell;
-var fight;
+var fight = false;
 var arr = [];
 var box = document.getElementsByClassName('grid')
+//create the game map
 function createMap(numberCells) {
   for (i = 0; i < numberCells; i++) {
     gridCells = document.createElement('div');
@@ -13,25 +14,25 @@ function createMap(numberCells) {
   }
 }
 createMap(100);
-
+//weapon object 
 function weapons(name, image, damage) {
   this.name = name;
   this.image = image;
   this.damage = damage;
 }
-
+//set weapons on the the grid
 weapons.prototype.setWeaponposition = function () {
   cell = availableCell();
   arr[cell] = this.name;
   const weaponBox = document.getElementById(cell);
   weaponBox.classList.add(this.name);
 };
-
+//player object
 function player(name, image) {
   this.name = name;
   this.image = image;
 }
-//position the players
+//position the players on the grid
 player.prototype.setPlayerPosition = function () {
   cell = availableCell();
   arr[cell] = this.name;
@@ -42,7 +43,7 @@ player.prototype.setPlayerPosition = function () {
   // fill adjacent cells to the player with with values to indicate not empty
   // This disallows the cells from being occupied by a another player
   adjacents.forEach((adjacent) => {
-    if (adjacent >= 0 && adjacent < 100 && arr[adjacent] == null)
+    if (adjacent >= 0 && adjacent < 100 && !(adjacents in arr))
       arr[adjacent] = 'full';
  
   });
@@ -53,12 +54,12 @@ return this.position =cell
 
 };
 
-// if the cell is between zero and 1oo -and  the cell is null ....it will make that cell full
-// what makes that cell null?
+//create objec function
 function obstacles(name, image) {
   this.name = name;
   this.image = image;
 }
+//set obstacles on the grid
 obstacles.prototype.setObstaclePosition = function () {
   for (i = 0; i < 10; i++) {
     cell = availableCell();
@@ -97,16 +98,15 @@ function availableCell() {
 
   return cell;
 }
+ 
 //movements
 player.prototype.setMovementRange = function (playerPosition) {
   $("section#map > div").removeClass('range');
-   rangeX = [];
-   rangeY = []
+  let rangeX = [];
+  let rangeY = [];
   let width = 10
   let up = playerPosition - 10
-  console.log(up)
   let down = playerPosition + 10
-  console.log(down)
   let right = playerPosition + 1
   let left = playerPosition - 1
   let blocked = false
@@ -115,9 +115,9 @@ player.prototype.setMovementRange = function (playerPosition) {
 
   while (up >= 0 && up >= playerPosition -30) {
     blocked = false;
-    const ranges = document.getElementById(up).attr('class').split(/\s+/)
-    ranges.forEach((rangeItem) => {
-     if (rangeItem === 'block' || rangeItem === 'player1' ||rangeItem=== 'player2') {
+    const ranges = $("div#"+up).attr('class').split(/\s+/);
+    ranges.forEach((item) => {
+     if (item === 'obstacle' || item === 'player1' ||item=== 'player2') {
         blocked = true;
       }
        })
@@ -126,17 +126,17 @@ player.prototype.setMovementRange = function (playerPosition) {
       break;
     }
      else {
-       document.getElementById(up).classList.add('range')
+       $("div#"+up).addClass('range');
       rangeY.push(up);
     }
     up = up - 10;   
   }
-     
+   
     while (down <=99  && down <= playerPosition +30) {
     blocked = false;
-    const ranges = document.getElementById(down).attr('class').split(/\s+/)
-    ranges.forEach((rangeItem) => {
-     if (rangeItem === 'block' || rangeItem === 'player1' ||rangeItem=== 'player2') {
+    const ranges = $("div#"+down).attr('class').split(/\s+/);
+    ranges.forEach((item) => {
+     if (item === 'obstacle' || item === 'player1' ||item=== 'player2') {
         blocked = true;
       }
        })
@@ -145,16 +145,16 @@ player.prototype.setMovementRange = function (playerPosition) {
       break;
     }
      else {
-       document.getElementById(down).classList.add('range')
+        $("div#"+down).addClass('range');
       rangeY.push(down);
     }
     down= down + 10;   
   }
-    while (left >= xmin && left >= playerPosition -3) {
+    while (left >= xMin && left >= playerPosition -3) {
     blocked = false;
-    const ranges = document.getElementById(left).attr('class').split(/\s+/)
-    ranges.forEach((rangeItem) => {
-     if (rangeItem === 'block' || rangeItem === 'player1' ||rangeItem=== 'player2') {
+    const ranges =$("div#"+left).attr('class').split(/\s+/);
+    ranges.forEach((item) => {
+     if (item === 'obstacle' || item === 'player1' ||item=== 'player2') {
         blocked = true;
       }
        })
@@ -163,16 +163,16 @@ player.prototype.setMovementRange = function (playerPosition) {
       break;
     }
      else {
-       document.getElementById(left).classList.add('range')
+        $("div#"+left).addClass('range');
       rangeX.push(left);
     }
     left =left - 1;   
   } 
   while (right <= xMax && right <= playerPosition+3) {
     blocked = false;
-    const ranges = document.getElementById(right).attr('class').split(/\s+/)
-    ranges.forEach((rangeItem) => {
-     if (rangeItem === 'block' || rangeItem === 'player1' ||rangeItem=== 'player2') {
+    const ranges = $("div#"+right).attr('class').split(/\s+/);
+    ranges.forEach((item) => {
+     if (item === 'obstacle' || item === 'player1' ||item=== 'player2') {
         blocked = true;
       }
        })
@@ -181,7 +181,7 @@ player.prototype.setMovementRange = function (playerPosition) {
       break;
     }
      else {
-       document.getElementById(up).classList.add('range')
+        $("div#"+right).addClass('range');
       rangeX.push(right);
     }
     right = right+1;   
@@ -190,7 +190,18 @@ player.prototype.setMovementRange = function (playerPosition) {
 }
 
 // active player
-
+player.prototype.activePlayer = function() {
+  if(this.name === 'player1'){
+    activePlayer = player1;
+    passivePlayer = player2;
+  }else{
+    activePlayer = player2;
+    passivePlayer = player1;
+  }
+  if (fight === false) {
+    activePlayer.setMovementRange(this.position);
+  }
+}
 //player movement
 player.prototype.movement=(targetPosition)=>{
   //get new player position
@@ -220,11 +231,11 @@ switch(this.name) {
 
   $.each(adjacentCells, function(index, adjacent) {
     if ($("#"+adjacent).find('img').length) {
-      fight = true;
+      fight = true
     }
   });
   if(fight === false ){
-    passivePlayer.activatePlayer(); 
+    passivePlayer.activePlayer(); 
   }
 
 else{
@@ -238,19 +249,19 @@ else{
 player1.activePlayer()
 
 
-box.hover(function(){
-    if (jQuery.inArray(parseInt(this.id),rangeX) >= 0 || jQuery.inArray(parseInt(this.id), rangeY) >= 0) { 
-      $(this).addClass(window.activePlayer.name+'Moving') ;
-    } //hover method has two functions mouse leave and mouse enter
+// box.hover(function(){
+//     if (jQuery.inArray(parseInt(this.id),rangeX) >= 0 || jQuery.inArray(parseInt(this.id), rangeY) >= 0) { 
+//       $(this).addClass(window.activePlayer.name+'Moving') ;
+//     } //hover method has two functions mouse leave and mouse enter
     
-  }, function(){
-    $(this).removeClass(window.activePlayer.name+'Moving');
-});
+//   }, function(){
+//     $(this).removeClass(window.activePlayer.name+'Moving');
+// });
 
-box.on("click", function() {
-  var targetPosition = parseInt(this.id); 
-  if (jQuery.inArray(targetPosition, rangeX) >= 0 || jQuery.inArray(targetPosition, rangeY) >= 0) { 
-    box.removeClass(window.activePlayer.name+'Moving');
-    activePlayer.move(targetPosition);
-  }
-});
+// box.on("click", function() {
+//   var targetPosition = parseInt(this.id); 
+//   if (jQuery.inArray(targetPosition, rangeX) >= 0 || jQuery.inArray(targetPosition, rangeY) >= 0) { 
+//     box.removeClass(window.activePlayer.name+'Moving');
+//     activePlayer.move(targetPosition);
+//   }
+// });
