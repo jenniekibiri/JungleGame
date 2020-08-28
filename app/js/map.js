@@ -3,7 +3,8 @@ const map = document.getElementById('map')
 var cell;
 var fight = false;
 var arr = [];
-var box = document.getElementsByClassName('grid')
+ let rangeX = [];
+  let rangeY = [];
 //create the game map
 function createMap(numberCells) {
   for (i = 0; i < numberCells; i++) {
@@ -38,6 +39,7 @@ player.prototype.setPlayerPosition = function () {
   arr[cell] = this.name;
   const playerBox = document.getElementById(cell);
   playerBox.classList.add(this.name);
+    playerBox.innerHTML = '<img src="./image/'+this.image+'" height="58"></img>';
   //players should not be adjacent
   var adjacents = [cell - 1, cell - 10, cell + 1, cell + 10];
   // fill adjacent cells to the player with with values to indicate not empty
@@ -50,7 +52,8 @@ player.prototype.setPlayerPosition = function () {
 
 
 
-return this.position =cell
+return this.position=cell
+
 
 };
 
@@ -102,8 +105,7 @@ function availableCell() {
 //movements
 player.prototype.setMovementRange = function (playerPosition) {
   $("section#map > div").removeClass('range');
-  let rangeX = [];
-  let rangeY = [];
+ 
   let width = 10
   let up = playerPosition - 10
   let down = playerPosition + 10
@@ -186,7 +188,7 @@ player.prototype.setMovementRange = function (playerPosition) {
     }
     right = right+1;   
   }
-   console.log(rangeX)
+  
 }
 
 // active player
@@ -199,35 +201,38 @@ player.prototype.activePlayer = function() {
     passivePlayer = player1;
   }
   if (fight === false) {
+   
     activePlayer.setMovementRange(this.position);
   }
 }
 //player movement
-player.prototype.movement=(targetPosition)=>{
+player.prototype.movement=function(targetPosition){
   //get new player position
   
   targetPosition = parseInt(targetPosition);
   //arr change
-  arr.splice(this.position, 1); 
+  arr.splice(this.position, -1); 
 
   arr[targetPosition] = this.name;
   //change player position
   var oldPosition=document.getElementById(this.position);
-  oldPosition.classList.remove(this.name);
+  oldPosition.classList.remove(this.image);
   var newPosition = document.getElementById(targetPosition)
   newPosition.classList.add(this.name);
  this.position = targetPosition;
+
   adjacentCells= [targetPosition-1,targetPosition+1,targetPosition-10,targetPosition+10];
 switch(this.name) {
     case 'player1':
-      newPosition.innerHTML = '<img src="../images/'+this.image+'" height="58"></img>';
+      newPosition.innerHTML = '<img src="./image/'+this.image+'" height="58"></img>';
+   
       break;
     case 'player2':
-      newPosition.innerHTML = '<img src="../images/'+this.image+'" height="58"></img>';
+      newPosition.innerHTML = '<img src="./image/'+this.image+'" height="58"></img>';
       break;
   }
 
-  oldPosition.classList.remove(this.name)
+   oldPosition.innerHTML = "";
 
   $.each(adjacentCells, function(index, adjacent) {
     if ($("#"+adjacent).find('img').length) {
@@ -249,19 +254,21 @@ else{
 player1.activePlayer()
 
 
-// box.hover(function(){
-//     if (jQuery.inArray(parseInt(this.id),rangeX) >= 0 || jQuery.inArray(parseInt(this.id), rangeY) >= 0) { 
-//       $(this).addClass(window.activePlayer.name+'Moving') ;
-//     } //hover method has two functions mouse leave and mouse enter
-    
-//   }, function(){
-//     $(this).removeClass(window.activePlayer.name+'Moving');
-// });
+var box = $( "div#map> div" );
 
-// box.on("click", function() {
-//   var targetPosition = parseInt(this.id); 
-//   if (jQuery.inArray(targetPosition, rangeX) >= 0 || jQuery.inArray(targetPosition, rangeY) >= 0) { 
-//     box.removeClass(window.activePlayer.name+'Moving');
-//     activePlayer.move(targetPosition);
-//   }
-// });
+box.hover(function(){
+    if (jQuery.inArray(parseInt(this.id),rangeX) >= 0 || jQuery.inArray(parseInt(this.id), rangeY) >= 0) { 
+      $(this).addClass(window.activePlayer.name+'Moving') ;
+    } //hover method has two functions mouse leave and mouse enter
+    
+  }, function(){
+    $(this).removeClass(window.activePlayer.name+'Moving');
+});
+
+box.on("click", function() {
+  var targetPosition = parseInt(this.id); 
+  if (jQuery.inArray(targetPosition, rangeX) >= 0 || jQuery.inArray(targetPosition, rangeY) >= 0) { 
+    box.removeClass(window.activePlayer.name+'Moving');
+    activePlayer.movement(targetPosition);
+  }
+});
