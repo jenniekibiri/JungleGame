@@ -104,7 +104,7 @@ function availableCell() {
  
 //movements
 player.prototype.setMovementRange = function (playerPosition) {
-  $("section#map > div").removeClass('range');
+  $("div#map > div").removeClass('range');
  
   let width = 10
   let up = playerPosition - 10
@@ -192,16 +192,19 @@ player.prototype.setMovementRange = function (playerPosition) {
 }
 
 // active player
-player.prototype.activePlayer = function() {
+player.prototype.activatePlayer = function() {
+
   if(this.name === 'player1'){
+  
     activePlayer = player1;
     passivePlayer = player2;
   }else{
+   
     activePlayer = player2;
     passivePlayer = player1;
   }
+
   if (fight === false) {
-   
     activePlayer.setMovementRange(this.position);
   }
 }
@@ -210,8 +213,8 @@ player.prototype.movement=function(targetPosition){
   //get new player position
   
   targetPosition = parseInt(targetPosition);
-  //arr change
-  arr.splice(this.position, -1); 
+  //arr change will remove the previous player position   
+  arr.splice(this.position, 1); 
 
   arr[targetPosition] = this.name;
   //change player position
@@ -222,6 +225,7 @@ player.prototype.movement=function(targetPosition){
  this.position = targetPosition;
 
   adjacentCells= [targetPosition-1,targetPosition+1,targetPosition-10,targetPosition+10];
+
 switch(this.name) {
     case 'player1':
       newPosition.innerHTML = '<img src="./image/'+this.image+'" height="58"></img>';
@@ -239,8 +243,9 @@ switch(this.name) {
       fight = true
     }
   });
+
   if(fight === false ){
-    passivePlayer.activePlayer(); 
+    passivePlayer.activatePlayer(); 
   }
 
 else{
@@ -251,7 +256,7 @@ else{
 }
 
 } 
-player1.activePlayer()
+player1.activatePlayer()
 
 
 var box = $( "div#map> div" );

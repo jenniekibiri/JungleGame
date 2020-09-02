@@ -64,24 +64,42 @@ section #map {
 .range {
   border-radius: 10px;
   border: 2px solid;
-  /* box-shadow: 0 0 10px rgb(99, 89, 89);
+  box-shadow: 0 0 10px rgb(99, 89, 89);
   cursor: pointer;
   z-index: 5;
-   border-color: #1cf051;
-   box-shadow: 0 0 10px #9ecaed; */
-   animation-name: flash;
+   border-color: #eeda27;
+  
+   /* animation-name: flash;
    animation-duration: 0.2s;
    animation-timing-function: linear;
    animation-iteration-count: infinite;
    animation-direction: alternate;
-   animation-play-state: running;
+   animation-play-state: running; */
 }
-@keyframes flash {
+/* @keyframes flash {
   from {
-    color: rgb(43, 136, 15);
+    color: rgb(255, 255, 255);
   }
 
   to {
-    color: rgb(5, 88, 3);
+    color: rgb(250, 236, 49);
   }
+} */
+.player1Moving {
+  background-image: url("../image/player1.png");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  /* For IE8 and earlier */
+}
+.player2Moving {
+  background-image: url("../image/player2.png");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  /* For IE8 and earlier */
 }
