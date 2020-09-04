@@ -3,8 +3,9 @@ const map = document.getElementById('map')
 var cell;
 var fight = false;
 var arr = [];
- let rangeX = [];
-  let rangeY = [];
+var rangeX=[],rangeY=[]
+var activePlayer, passivePlayer;
+var adjacentCells;
 //create the game map
 function createMap(numberCells) {
   for (i = 0; i < numberCells; i++) {
@@ -45,16 +46,11 @@ player.prototype.setPlayerPosition = function () {
   // fill adjacent cells to the player with with values to indicate not empty
   // This disallows the cells from being occupied by a another player
   adjacents.forEach((adjacent) => {
-    if (adjacent >= 0 && adjacent < 100 && !(adjacents in arr))
+    if (adjacent >= 0 && adjacent < 100 && !(adjacent in arr))
       arr[adjacent] = 'full';
  
   });
-
-
-
 return this.position=cell
-
-
 };
 
 //create objec function
@@ -104,8 +100,10 @@ function availableCell() {
  
 //movements
 player.prototype.setMovementRange = function (playerPosition) {
-  $("div#map > div").removeClass('range');
  
+  $("div#map > div").removeClass('range');
+  rangeX=[]
+ rangeY=[]
   let width = 10
   let up = playerPosition - 10
   let down = playerPosition + 10
@@ -188,19 +186,17 @@ player.prototype.setMovementRange = function (playerPosition) {
     }
     right = right+1;   
   }
-  
+  return [rangeX,rangeY];
 }
 
 // active player
 player.prototype.activatePlayer = function() {
 
   if(this.name === 'player1'){
-  
     activePlayer = player1;
     passivePlayer = player2;
   }else{
-   
-    activePlayer = player2;
+     activePlayer = player2;
     passivePlayer = player1;
   }
 
@@ -211,15 +207,24 @@ player.prototype.activatePlayer = function() {
 //player movement
 player.prototype.movement=function(targetPosition){
   //get new player position
-  
+
   targetPosition = parseInt(targetPosition);
+ 
   //arr change will remove the previous player position   
   arr.splice(this.position, 1); 
+  rangeX.splice(this.position,1)
+rangeY.splice(this.position,1)
+rangeX.splice(targetPosition,1)
+rangeY.splice(targetPosition,1)
 
+ if(targetPosition==this.position){
+ return   arr[targetPosition]='full'
+  } else{
   arr[targetPosition] = this.name;
+  }
   //change player position
   var oldPosition=document.getElementById(this.position);
-  oldPosition.classList.remove(this.image);
+  oldPosition.classList.remove(this.image,this.name);
   var newPosition = document.getElementById(targetPosition)
   newPosition.classList.add(this.name);
  this.position = targetPosition;
@@ -257,23 +262,24 @@ else{
 
 } 
 player1.activatePlayer()
-
-
 var box = $( "div#map> div" );
-
-box.hover(function(){
+box.hover(function(){ 
+ var targetPosition = parseInt(this.id);
     if (jQuery.inArray(parseInt(this.id),rangeX) >= 0 || jQuery.inArray(parseInt(this.id), rangeY) >= 0) { 
       $(this).addClass(window.activePlayer.name+'Moving') ;
     } //hover method has two functions mouse leave and mouse enter
-    
+  
   }, function(){
     $(this).removeClass(window.activePlayer.name+'Moving');
 });
-
+// onclick the player moves 
 box.on("click", function() {
-  var targetPosition = parseInt(this.id); 
+var targetPosition = parseInt(this.id);
   if (jQuery.inArray(targetPosition, rangeX) >= 0 || jQuery.inArray(targetPosition, rangeY) >= 0) { 
     box.removeClass(window.activePlayer.name+'Moving');
     activePlayer.movement(targetPosition);
-  }
+    
+  }  
 });
+
+//check weapon 
