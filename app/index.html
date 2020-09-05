@@ -12,7 +12,35 @@
 
   <body>
     <h4 class="display-4 text-center header text-white">jungle</h4>
-    <div id="map"></div>
+
+        <div class="row p-2  ">
+                <div class="col md-3 bg-success  center card "> 
+                        <h3 class="display-lead">player1</h3>                      
+                         <h3 class="display-lead   text-white">Active Weapon:</h3>
+                         <p class="text-white">Pick your Weapon</p>
+                        <div id="player1weapons" class="text-white center bg-secondary card "></div>
+                        <h3 class="display-lead   text-white">Health:</h3>
+                        <p id="player1health" class="text-white center bg-secondary card"> 100</p>
+                <h3 class="display-lead  text-white">Damage:</h3>
+                <p id="player1damage" class="text-white center  bg-danger card "> 10</p>
+                </div>
+                <div class="col md-6">
+                        <div id="map"></div>
+                </div>
+        <div class="col md-3 bg-success  center ">
+                <h3 class="display-lead">player2</h3>
+                <h3 class="display-lead   text-white">Active Weapon:</h3>
+                <p class="text-white">Pick your Weapon</p>
+                <div id="player2weapons" class="text-white center bg-secondary card "></div>
+                <h3 class="display-lead text-white">Health:</h3>
+                <p id="player2health" class="text-white center bg-secondary card"> 100</p>
+                <h3 class="display-lead  text-white">Damage:</h3>
+                <p id="player2damage" class="text-white  center bg-danger card"> 10</p>
+ 
+        </div>
+        </div>
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
