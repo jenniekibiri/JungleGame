@@ -245,6 +245,7 @@ player.prototype.movement = function (targetPosition) {
   $.each(adjacentCells, function (index, adjacent) {
     if ($("#" + adjacent).find('img').length) {
       fight = true
+      fightEnabled()
      
     }
   });
@@ -359,4 +360,7 @@ for(var i=0; i<=movedToBoxes.length; i++){
 
 }
 
+}
+function fightEnabled(){
+  alert('hello')
 }
