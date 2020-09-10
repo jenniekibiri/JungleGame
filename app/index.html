@@ -1,68 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jungle game</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  </head>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>jungle game</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+                integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+                crossorigin="anonymous">
+</head>
 
-  <body>
-    <h4 class="display-4 text-center header text-white">jungle</h4>
+<body>
+        <h4 class="display-4 text-center header text-white">jungle</h4>
 
         <div class="row p-2  ">
-                <div class="col md-3 bg-dark  center  "> 
-                        <h3 class="display-lead text-white">player1</h3>                      
-                         <h3 class="display-lead   text-white">Active Weapon:</h3>
-                         <p class="text-white">Pick your Weapon</p>
+                <div class="col md-3 bg-dark  center  ">
+                        <h3 class="display-lead text-white">player1</h3>
+                        <h3 class="display-lead   text-white">Active Weapon:</h3>
+                        <p class="text-white">Pick your Weapon</p>
                         <div id="player1weapons" class="text-white center bg-secondary card "></div>
                         <h3 class="display-lead   text-white">Health:</h3>
                         <p id="player1lifePoints" class="text-white center bg-secondary card"> 100</p>
-                <h3 class="display-lead  text-white">Damage:</h3>
-                <p id="player1damage" class="text-white center  bg-danger card "> 10</p>
-                 <div class="center ml-5">
-                <button type="button" id='player1AttackBtn' class="btn btn-danger btn-lg" disabled
-                        onclick="attack()">Attack</button>
-                <button type="button" id="player1DefendBtn" class="btn btn-success btn-lg" disabled
-                        onclick="defend()">Defend</button></div>
+                        <h3 class="display-lead  text-white">Damage:</h3>
+                        <p id="player1damage" class="text-white center  bg-danger card "> 10</p>
+                        <div class="center ml-5">
+                                <button type="button" id='player1AttackBtn' class="btn btn-danger btn-lg" disabled
+                                        onclick="attack()">Attack</button>
+                                <button type="button" id="player1DefendBtn" class="btn btn-success btn-lg" disabled
+                                        onclick="defend()">Defend</button></div>
                 </div>
 
                 <div class="col md-6">
                         <div id="map"></div>
                 </div>
-        <div class="col md-3 bg-dark center ">
-                <h3 class="display-lead text-white">player2</h3>
-                <h3 class="display-lead   text-white">Active Weapon:</h3>
-                <p class="text-white">Pick your Weapon</p>
-                <div id="player2weapons" class="text-white center bg-secondary card "></div>
-                <h3 class="display-lead text-white">Health:</h3>
-                <p id="player2lifePoints" class="text-white center bg-secondary card"> 100</p>
-                <h3 class="display-lead  text-white">Damage:</h3>
-                <p id="player2damage" class="text-white  center bg-danger card"> 10</p>
-                 <div class="center ml-5">
-                         <button type="button" id='player2AttackBtn' class="btn btn-danger btn-lg" disabled
-                                 onclick="attack()">Attack</button>
-                         <button type="button" id="player2DefendBtn" class="btn btn-success btn-lg" disabled
-                                 onclick="defend()">Defend</button></div>
-                 </div>
- 
+                <div class="col md-3 bg-dark center ">
+                        <h3 class="display-lead text-white">player2</h3>
+                        <h3 class="display-lead   text-white">Active Weapon:</h3>
+                        <p class="text-white">Pick your Weapon</p>
+                        <div id="player2weapons" class="text-white center bg-secondary card "></div>
+                        <h3 class="display-lead text-white">Health:</h3>
+                        <p id="player2lifePoints" class="text-white center bg-secondary card"> 100</p>
+                        <h3 class="display-lead  text-white">Damage:</h3>
+                        <p id="player2damage" class="text-white  center bg-danger card"> 10</p>
+                        <div class="center ml-5">
+                                <button type="button" id='player2AttackBtn' class="btn btn-danger btn-lg" disabled
+                                        onclick="attack()">Attack</button>
+                                <button type="button" id="player2DefendBtn" class="btn btn-success btn-lg" disabled
+                                        onclick="defend()">Defend</button></div>
+                </div>
+
         </div>
         </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-    </script>
-    <script src="./js/map.js " async></script>
-  </body>
+        <!-- Modal -->
+        <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                        <div class="modal-content">
+                                <div class="modal-header text-center">
+                                        <h5 class="modal-title  " id="exampleModalLongTitle">Game Rules</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <div class="modal-body">
+                                        <div>
+                                                <h3 >Weapons</h3>
+                                                <p>The default weapon inflicts 10 points</p>
+                                                <p>Each weapon inflicts a certain number of damage</p>
+                                        </div>
+                                        <div >
+                                                <h3 >Movement</h3>
+                                                <p>For each turn, a player can move from one to three boxes
+                                                        (horizontally or vertically)
+                                                        before ending their turn.</p>
+                                                <p> a player cannot move past an obstacle</p>
+                                                <p>If a player passes over a box containing a weapon, they leave their
+                                                        current
+                                                        weapon on site and replace it with the new one.</p>
+                                        </div>
+                                        <div >
+                                                <h3 >Fight</h3>
+                                                <p>If players cross over adjacent squares (horizontally or vertically),
+                                                        a battle begins.
+                                                </p>
+                                                <p>Each player attacks in turn</p>
+                                                <p>The player can choose to attack or defend against the next shot</p>
+                                                <p>If the player chooses to defend themselves, they sustain 50% less
+                                                        damage than normal
+                                                </p>
+                                                <p>As soon as the life points of a player (initially 100) falls to 0,
+                                                        they lose. A message
+                                                        appears and the game is over</p>
+                                        </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                        <button type="button" class="btn btn-success"
+                                                data-dismiss="modal">understood</button>
+
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+                crossorigin="anonymous">
+        </script>
+        <script src="./js/map.js " async></script>
+</body>
 
 </html>

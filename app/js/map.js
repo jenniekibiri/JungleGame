@@ -389,7 +389,6 @@ function attack(){
   }else{
     passivePlayer.lifePoints-=activePlayer.damage
   }
-
   if(passivePlayer.lifePoints<0){ 
     passivePlayer.lifePoints=0;
    }
@@ -415,3 +414,8 @@ function defend(){
   passivePlayer.activatePlayer()
   fightEnabled()
 }
+
+
+    $(window).on('load',function(){
+        $('#exampleModalCenter').modal('show');
+    });
