@@ -400,8 +400,11 @@ if(passivePlayer.lifePoints===0){
   	}else{
   		activePlayer.name = "Player2";
     }	
+    $("#exampleModal2 .modal-body p:nth-child(3)").text(activePlayer.name);
+    $("#winner").attr("src","./image/"+activePlayer.image);
+ $('#exampleModal2').modal('show');
 
-    alert("winner is"+activePlayer.name)
+    
   }else{
     passivePlayer.activatePlayer();
      fightEnabled()
