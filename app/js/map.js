@@ -34,6 +34,8 @@ weapons.prototype.setWeaponposition = function () {
 function player(name, image) {
   this.name = name;
   this.image = image;
+   this.lifePoints = 100;
+    this.damage = 10
 }
 //position the players on the grid
 player.prototype.setPlayerPosition = function () {
@@ -361,6 +363,55 @@ for(var i=0; i<=movedToBoxes.length; i++){
 }
 
 }
+
+var player1AttackBtn= $("#player1AttackBtn");
+var player1DefendBtn = $("#player1DefendBtn");
+var player2AttackBtn = $("#player2AttackBtn");
+var player2DefendBtn = $("#player2DefendBtn");
+
 function fightEnabled(){
-  alert('hello')
+  if (activePlayer === player1){
+    player1AttackBtn.removeAttr('disabled');
+    player1DefendBtn.removeAttr('disabled');
+    player2AttackBtn.attr('disabled', 'true');
+     player2DefendBtn.attr('disabled', 'true');
+  }else{
+    player2AttackBtn.removeAttr('disabled');
+    player2DefendBtn.removeAttr('disabled');
+    player1AttackBtn.attr('disabled', 'true');
+    player1DefendBtn.attr('disabled', 'true');
+  }
+}
+
+function attack(){
+  if(passivePlayer.defend===true){
+    passivePlayer.lifePoints-=activePlayer.damage/2
+  }else{
+    passivePlayer.lifePoints-=activePlayer.damage
+  }
+
+  if(passivePlayer.lifePoints<0){ 
+    passivePlayer.lifePoints=0;
+   }
+  $("#"+passivePlayer.name+"lifePoints").text(passivePlayer.lifePoints);
+if(passivePlayer.lifePoints===0){
+  
+  	if(activePlayer.name==="player1"){
+  		activePlayer.name = "Player1";
+  	}else{
+  		activePlayer.name = "Player2";
+    }	
+
+    alert("winner is"+activePlayer.name)
+  }else{
+    passivePlayer.activatePlayer();
+     fightEnabled()
+  } 
+
+ 
+}
+function defend(){
+  activePlayer.defend=true;
+  passivePlayer.activatePlayer()
+  fightEnabled()
 }

@@ -14,28 +14,40 @@
     <h4 class="display-4 text-center header text-white">jungle</h4>
 
         <div class="row p-2  ">
-                <div class="col md-3 bg-dark  center card "> 
+                <div class="col md-3 bg-dark  center  "> 
                         <h3 class="display-lead text-white">player1</h3>                      
                          <h3 class="display-lead   text-white">Active Weapon:</h3>
                          <p class="text-white">Pick your Weapon</p>
                         <div id="player1weapons" class="text-white center bg-secondary card "></div>
                         <h3 class="display-lead   text-white">Health:</h3>
-                        <p id="player1health" class="text-white center bg-secondary card"> 100</p>
+                        <p id="player1lifePoints" class="text-white center bg-secondary card"> 100</p>
                 <h3 class="display-lead  text-white">Damage:</h3>
                 <p id="player1damage" class="text-white center  bg-danger card "> 10</p>
+                 <div class="center ml-5">
+                <button type="button" id='player1AttackBtn' class="btn btn-danger btn-lg" disabled
+                        onclick="attack()">Attack</button>
+                <button type="button" id="player1DefendBtn" class="btn btn-success btn-lg" disabled
+                        onclick="defend()">Defend</button></div>
                 </div>
+
                 <div class="col md-6">
                         <div id="map"></div>
                 </div>
-        <div class="col md-3 bg-dark  center ">
+        <div class="col md-3 bg-dark center ">
                 <h3 class="display-lead text-white">player2</h3>
                 <h3 class="display-lead   text-white">Active Weapon:</h3>
                 <p class="text-white">Pick your Weapon</p>
                 <div id="player2weapons" class="text-white center bg-secondary card "></div>
                 <h3 class="display-lead text-white">Health:</h3>
-                <p id="player2health" class="text-white center bg-secondary card"> 100</p>
+                <p id="player2lifePoints" class="text-white center bg-secondary card"> 100</p>
                 <h3 class="display-lead  text-white">Damage:</h3>
                 <p id="player2damage" class="text-white  center bg-danger card"> 10</p>
+                 <div class="center ml-5">
+                         <button type="button" id='player2AttackBtn' class="btn btn-danger btn-lg" disabled
+                                 onclick="attack()">Attack</button>
+                         <button type="button" id="player2DefendBtn" class="btn btn-success btn-lg" disabled
+                                 onclick="defend()">Defend</button></div>
+                 </div>
  
         </div>
         </div>
