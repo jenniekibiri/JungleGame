@@ -14,6 +14,11 @@
         <!-- section game title -->
         <section>
                 <h4 class="display-4 text-center header text-white">Jungle Game</h4>
+                <button type="button" class="btn btn-dark ml-3" data-toggle="modal" data-target="#exampleModal">
+                        game rules
+                </button>
+
+                 <input TYPE="button" class="btn btn-success" onClick="history.go(0)" VALUE="Restart">
         </section>
 
         <!-- player Dashboard -->
@@ -32,8 +37,8 @@
                                                                 <div class="row">
                                                                         <div id="player1weapons" class="col md-6 sm-6">
                                                                         </div>
-                                                                        <div class="col md-6 sm-6">
-                                                                                <p>sword</p>
+                                                                        <div id="player1WeaponImage" class="col md-6 sm-6">
+                                                                                
                                                                         </div>
                                                                 </div>
                                                                 <div class="row">
@@ -92,11 +97,9 @@
                                                                 alt="...">
                                                         <div class="card-body">
                                                                 <div class="row">
-                                                                        <div id="player2weapons" class="col md-5 sm-6">
+                                                                        <div id="player2weapons" class="col md-6 sm-6">
                                                                         </div>
-                                                                        <div class="col md-6 sm-6">
-                                                                                <p>sword</p>
-                                                                        </div>
+                                                                       <div id="player2WeaponImage" class=" col md-6 sm-6"></div>
                                                                 </div>
                                                                 <div class="row">
                                                                         <div class="col md-6 sm-6">
@@ -174,7 +177,7 @@
         </section>
         <!-- game rules modal section -->
         <section>
-                <div class="modal fade   " id="exampleModalCenter" tabindex="-1" role="dialog"
+                <div class="modal fade   " id="exampleModal" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                         <div class="modal-dialog   modal-dialog-centered modal-xl" role="document">

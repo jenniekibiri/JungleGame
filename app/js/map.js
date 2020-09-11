@@ -74,15 +74,14 @@ obstacles.prototype.setObstaclePosition = function () {
 //instantiate obstacles
 const obstacle = new obstacles('obstacle', 'obstacle.png');
 //instantiate players
-const player1 = new player('player1', 'player1.png');
-const player2 = new player('player2', 'player2.png');
+const player1 = new player('player1', 'merida.png');
+const player2 = new player('player2', 'zelda.png');
 
 //instantiate the objects
-const sword = new weapons('sword', 'sword.png', 20);
-const dagger = new weapons('dagger', 'dagger.png', 12);
+const sword = new weapons('sword', 'sword.png', 18);
 const gun = new weapons('gun', 'gun.png', 15);
-const bow = new weapons('bow', 'bow.png', 10);
-
+const bow = new weapons('bow', 'bow.png', 14);
+const dagger = new weapons('dagger', 'dagger.png', 12);
 sword.setWeaponposition();
 dagger.setWeaponposition();
 gun.setWeaponposition();
@@ -347,16 +346,10 @@ for(var i=0; i<=movedToBoxes.length; i++){
       movedToBox.removeClass(newWeapon);
       movedToBox.addClass(oldWeapon);
       activePlayer.weapons = newWeapon;
-            $("#"+activePlayer.name+"weapons").removeClass(activePlayer.weapons)
-       $("#"+activePlayer.name+"sword").removeClass('sword');
-      $("#"+activePlayer.name+"dagger").removeClass('dagger');
-      $("#"+activePlayer.name+"bow").removeClass('bow');
-      $("#"+activePlayer.name+"gun").removeClass('gun');
-      $("#"+activePlayer.name+newWeapon).removeClass(newWeapon);
-      $("#"+activePlayer.name+newWeapon).addClass(newWeapon);
+          
       $("#"+activePlayer.name+"damage").text(activePlayer.damage);
-       // $("#"+activePlayer.name+"weapons").text(activePlayer.weapons);
-         $("#"+activePlayer.name+"weapons").addClass(activePlayer.weapons)
+       $("#"+activePlayer.name+"weapons").text(activePlayer.weapons);
+         //$("#"+activePlayer.name+"weapons").addClass(activePlayer.weapons)
         
         }
 
@@ -419,6 +412,4 @@ function defend(){
 }
 
 
-    // $(window).on('load',function(){
-    //     $('#exampleModalCenter').modal('show');
-    // });
+   
