@@ -65,7 +65,7 @@ section #map {
   background-repeat: no-repeat;
 } */
 .obstacle {
-  background-image: url('../image/obstacle.png');
+  background-image: url('../image/boulder.png');
   background-repeat: no-repeat;
 }
 
