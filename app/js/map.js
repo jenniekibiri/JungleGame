@@ -419,6 +419,6 @@ function defend(){
 }
 
 
-    $(window).on('load',function(){
-        $('#exampleModalCenter').modal('show');
-    });
+    // $(window).on('load',function(){
+    //     $('#exampleModalCenter').modal('show');
+    // });
