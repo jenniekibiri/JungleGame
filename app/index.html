@@ -10,6 +10,7 @@
                 crossorigin="anonymous">
 </head>
 
+
 <body>
         <!-- section game title -->
         <section>
@@ -18,7 +19,7 @@
                         game rules
                 </button>
 
-                 <input TYPE="button" class="btn btn-success" onClick="history.go(0)" VALUE="Restart">
+                <input TYPE="button" class="btn btn-success" onClick="history.go(0)" VALUE="Restart">
         </section>
 
         <!-- player Dashboard -->
@@ -37,8 +38,9 @@
                                                                 <div class="row">
                                                                         <div id="player1weapons" class="col md-6 sm-6">
                                                                         </div>
-                                                                        <div id="player1WeaponImage" class="col md-6 sm-6">
-                                                                                
+                                                                        <div id="player1WeaponImage"
+                                                                                class="col md-6 sm-6">
+
                                                                         </div>
                                                                 </div>
                                                                 <div class="row">
@@ -99,7 +101,8 @@
                                                                 <div class="row">
                                                                         <div id="player2weapons" class="col md-6 sm-6">
                                                                         </div>
-                                                                       <div id="player2WeaponImage" class=" col md-6 sm-6"></div>
+                                                                        <div id="player2WeaponImage"
+                                                                                class=" col md-6 sm-6"></div>
                                                                 </div>
                                                                 <div class="row">
                                                                         <div class="col md-6 sm-6">
@@ -162,9 +165,11 @@
                                         </div>
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                                <p>The winner is</p>
-                                                <p><img src="" width="250" id="winner"></img></p>
-                                                <p></p>
+
+                                                <h3 class="text-center">The winner is</h3>
+                                                <h3 class="text-center"><img src="" class="center" width="250"
+                                                                id="winner"></img></p>
+                                                        <h3 class="text-center"></h3>
                                         </div>
                                         <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger"
@@ -250,7 +255,11 @@
                 integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
                 crossorigin="anonymous">
         </script>
-        <script src="./js/map.js " async></script>
+        <script src="./js/gameMap.js"></script>
+         <script src="./js/assets.js"></script>
+        <script src="./js/fight.js"></script>
+       
+
 </body>
 
 </html>
