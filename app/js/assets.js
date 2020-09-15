@@ -1,4 +1,30 @@
-import {availableCell,searchWeapon} from './helper.js'
+//variables
+let fight = false;
+let cell;
+let arr = [];
+let rangeX = [];
+let rangeY = [];
+let adjacentCells;
+//variables
+var activePlayer;
+var passivePlayer;
+// weapon class
+class Weapons {
+  constructor(name, image, damage) {
+    this.name = name;
+    this.image = image;
+    this.damage = damage;
+  }
+
+  // set weapons on the the grid
+  setWeaponposition() {
+    cell = availableCell();
+    arr[cell] = this.name;
+    const weaponBox = document.getElementById(cell);
+    weaponBox.classList.add(this.name);
+  }
+}
+
 // player class
 class Player {
   constructor(name, image) {
@@ -151,7 +177,7 @@ class Player {
     newPosition.classList.add(this.name);
     const searchWeaponFrom = this.position;
     const searchWeaponTo = targetPosition;
-    //search weapons
+    //search weapons 
     searchWeapon(searchWeaponFrom, searchWeaponTo);
 
     this.position = targetPosition;
@@ -188,6 +214,25 @@ class Player {
   }
 }
 
+//
+
+// create object class
+class Obstacles {
+  constructor(name, image) {
+    this.name = name;
+    this.image = image;
+  }
+
+  // set obstacles on the grid
+  setObstaclePosition() {
+    for (let i = 0; i < 10; i++) {
+      cell = availableCell();
+      arr[cell] = this.name;
+      const obstacleBox = document.getElementById(cell);
+      obstacleBox.classList.add(this.name);
+    }
+  }
+}
 
 // instantiate obstacles
 const obstacle = new Obstacles('obstacle', 'obstacle.png');
@@ -209,6 +254,14 @@ player2.setPlayerPosition();
 obstacle.setObstaclePosition();
 player1.activatePlayer();
 
+// findAvailableCell
+function availableCell() {
+  do {
+    cell = Math.floor(Math.random() * 100);
+  } while (cell in arr);
+
+  return cell;
+}
 
 // On mouse hover show player image moving over to the hovered over box
 const box = $('div#map> div');
@@ -230,4 +283,67 @@ box.on('click', function () {
   }
 });
 
+// check if weapon in the player position
+function searchWeapon(searchWeaponFrom, searchWeaponTo) {
+  const searchDiff = searchWeaponTo - searchWeaponFrom;
+  const movedToBoxes = [];
+  if (searchDiff > 0) {
+    if (searchDiff <= 3) {
+      for (var i = searchWeaponFrom; i <= searchWeaponTo; i++) {
+        if (jQuery.inArray(i, rangeX) >= 0) {
+          movedToBoxes.push(i);
 
+        }
+      }
+    } else {
+      for (var i = searchWeaponFrom; i <= searchWeaponTo; i += 10) {
+        if (jQuery.inArray(i, rangeY) >= 0) {
+          movedToBoxes.push(i);
+
+        }
+      }
+    }
+  } else if (searchDiff >= -3) {
+    for (var i = searchWeaponFrom; i >= searchWeaponTo; i--) {
+      if (jQuery.inArray(i, rangeX) >= 0) {
+        movedToBoxes.push(i);
+      }
+    }
+  } else {
+    for (var i = searchWeaponFrom; i >= searchWeaponTo; i -= 10) {
+      if (jQuery.inArray(i, rangeY) >= 0) {
+        movedToBoxes.push(i);
+      }
+    }
+  }
+  for (var i = 0; i <= movedToBoxes.length; i++) {
+    movedToBox = $(`div#${movedToBoxes[i]}`);
+
+    oldWeapon = activePlayer.Weapons;
+
+    if (movedToBox.hasClass('sword')) {
+      newWeapon = 'sword';
+      activePlayer.damage = 18;
+    } else if (movedToBox.hasClass('dagger')) {
+      newWeapon = 'dagger';
+      activePlayer.damage = 12;
+    } else if (movedToBox.hasClass('bow')) {
+      newWeapon = 'bow';
+      activePlayer.damage = 14;
+    } else if (movedToBox.hasClass('gun')) {
+      newWeapon = 'gun';
+      activePlayer.damage = 15;
+    } else {
+      newWeapon = '';
+    }
+    if (newWeapon != '') {
+      //remove old weapons and add newly picked
+      movedToBox.removeClass(newWeapon);
+      movedToBox.addClass(oldWeapon);
+      activePlayer.Weapons = newWeapon;
+
+      $(`#${activePlayer.name}damage`).text(activePlayer.damage);
+      $(`#${activePlayer.name}weapons`).text(activePlayer.Weapons);
+    }
+  }
+}

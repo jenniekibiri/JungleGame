@@ -1,13 +1,5 @@
 // variables
 const map = document.getElementById('map');
-let cell;
-const fight = false;
-const arr = []; 
-const rangeX = [];
-const rangeY = [];
-let activePlayer;
-let passivePlayer;
-let adjacentCells;
 
 // create the game map
 function createMap(numberCells) {
