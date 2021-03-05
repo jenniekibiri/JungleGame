@@ -1,5 +1,10 @@
 # JungleGame
-
+ ## An awesome Turnbased javascript game
+ ![](https://i.imgur.com/ghpasUM.png)
+ 
+ 
+ 
+ 
 Openclassrooms javascript game
 Start by randomly generating the game map. Each box can be either:
 
